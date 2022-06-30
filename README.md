@@ -15,6 +15,9 @@ for more details). See below for how to use a specific Scala version or all of t
 
 ### Build without test ###
     ./gradlew build -x test
+    
+### Cleaning the build ###
+    ./gradlew clean
 
 ### Build a jar and run it ###
     ./gradlew jar
