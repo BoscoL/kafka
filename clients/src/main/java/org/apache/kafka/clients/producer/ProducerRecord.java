@@ -123,6 +123,8 @@ public class ProducerRecord<K, V> {
     }
     
     /**
+     * 注意：该记录会使用 hashed（key）% partitions 计算最终的存储分区
+     *
      * Create a record to be sent to Kafka
      * 
      * @param topic The topic the record will be appended to
@@ -134,6 +136,9 @@ public class ProducerRecord<K, V> {
     }
     
     /**
+     *
+     * 注意：该记录会使用粘性分区策略。
+     *
      * Create a record with no key
      * 
      * @param topic The topic this record should be sent to

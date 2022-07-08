@@ -25,8 +25,14 @@ import java.util.Map;
 /**
  * The default partitioning strategy:
  * <ul>
+ *      // 如果指定了分区值，则存储在指定的分区
  * <li>If a partition is specified in the record, use it
+ *
+ *      // 如果没有指定分区值，但存在key值的情况下，计算key的hash值结合分区数进行取余运算得到最终存储的分区值
  * <li>If no partition is specified but a key is present choose a partition based on a hash of the key
+ *
+ *     // 如果没有指定分区值和key值，则使用粘性分区策略：在Kafka集群的可用分区（可用分区缺乏则在所有分区）中随机选取一个分区，并尽可能一直选用该分区，
+ *     // 待该分区的batch已满（默认16K）或 linger.ms 超时，Kafka会以同样方式再选择一个分区进行使用。
  * <li>If no partition or key is present choose the sticky partition that changes when the batch is full.
  * 
  * See KIP-480 for details about sticky partitioning.
